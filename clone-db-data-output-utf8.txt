@@ -1,0 +1,139 @@
+﻿Creating extension pgcrypto on target
+
+Processing table: audit_log
+DROP TABLE IF EXISTS public.audit_log CASCADE;
+CREATE TABLE public.audit_log (
+id uuid DEFAULT gen_random_uuid() NOT NULL,
+action varchar(50) NOT NULL,
+entity varchar(50) NOT NULL,
+entity_id varchar(255),
+user_id varchar(255),
+details text,
+created_at timestamp with time zone DEFAULT now() ,
+PRIMARY KEY (id)
+);
+Table audit_log has no rows, skipping data copy.
+
+Processing table: candidates
+DROP TABLE IF EXISTS public.candidates CASCADE;
+CREATE TABLE public.candidates (
+id uuid DEFAULT gen_random_uuid() NOT NULL,
+full_name varchar(255) NOT NULL,
+email varchar(255),
+phone varchar(50),
+current_designation varchar(255),
+current_company varchar(255),
+total_experience_years numeric(4, 1),
+relevant_experience_years numeric(4, 1),
+primary_skills jsonb DEFAULT '[]'::jsonb,
+secondary_skills jsonb DEFAULT '[]'::jsonb,
+resume_link text,
+location_current varchar(255),
+location_preferred jsonb DEFAULT '[]'::jsonb,
+open_to_relocate varchar(20),
+notice_period_text varchar(100),
+notice_period_days integer,
+employment_type varchar(20),
+current_ctc_lpa numeric(10, 2),
+expected_ctc_lpa numeric(10, 2),
+availability_date date,
+source varchar(100),
+status varchar(20),
+registered_at timestamp with time zone DEFAULT now(),
+updated_at timestamp with time zone DEFAULT now() ,
+PRIMARY KEY (id)
+);
+Copying 788 rows into candidates...
+
+Processing table: discovered_keywords
+DROP TABLE IF EXISTS public.discovered_keywords CASCADE;
+CREATE TABLE public.discovered_keywords (
+id uuid DEFAULT gen_random_uuid() NOT NULL,
+type varchar(50),
+raw_value varchar(255) NOT NULL,
+normalized varchar(255),
+occurrences integer DEFAULT 1,
+status varchar(20),
+first_seen_at timestamp with time zone,
+last_seen_at timestamp with time zone,
+reviewed_by varchar(255),
+created_at timestamp with time zone DEFAULT now() ,
+PRIMARY KEY (id)
+);
+Table discovered_keywords has no rows, skipping data copy.
+
+Processing table: employment_histories
+DROP TABLE IF EXISTS public.employment_histories CASCADE;
+CREATE TABLE public.employment_histories (
+id uuid DEFAULT gen_random_uuid() NOT NULL,
+passport_id uuid NOT NULL,
+company_name varchar(255) NOT NULL,
+designation varchar(255) NOT NULL,
+employment_type varchar(50),
+start_date date,
+end_date date,
+official_email varchar(255),
+is_current boolean DEFAULT false,
+verification_status varchar(20),
+verified_at timestamp with time zone,
+created_at timestamp with time zone DEFAULT now() ,
+PRIMARY KEY (id)
+);
+Table employment_histories has no rows, skipping data copy.
+
+Processing table: passports
+DROP TABLE IF EXISTS public.passports CASCADE;
+CREATE TABLE public.passports (
+id uuid DEFAULT gen_random_uuid() NOT NULL,
+candidate_id uuid NOT NULL,
+status varchar(20),
+trust_score integer DEFAULT 0,
+completion_percent integer DEFAULT 0,
+full_name varchar(255),
+email varchar(255),
+phone varchar(50),
+current_role varchar(255),
+total_experience varchar(50),
+skills text,
+location varchar(255),
+notice_period varchar(100),
+linkedin_url text,
+resume_link text,
+consent_given boolean DEFAULT false,
+created_at timestamp with time zone DEFAULT now(),
+updated_at timestamp with time zone DEFAULT now() ,
+PRIMARY KEY (id),
+UNIQUE (candidate_id)
+);
+node : ERROR error: syntax error at or near "current_role"
+At line:1 char:61
++ ... TalentPulse'; node .\clone-db-data.js > clone-db-data-output.txt 2>&1
++                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ERROR error: sy... "current_role" 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    at 
+D:\Training\working\Cognivectra\TalentPulse\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections 
+(node:internal/process/task_queues:104:5)
+    at async D:\Training\working\Cognivectra\TalentPulse\clone-db-data.js:67:7 
+{
+  length: 102,
+  severity: 'ERROR',
+  code: '42601',
+  detail: undefined,
+  hint: undefined,
+  position: '304',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'scan.l',
+  line: '1244',
+  routine: 'scanner_yyerror'
+}

@@ -1,0 +1,1736 @@
+﻿TABLE audit_log
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "action",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "entity",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "entity_id",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "user_id",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "details",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "audit_log_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS []
+UQS []
+IDX [
+  {
+    "indexname": "audit_log_pkey",
+    "indexdef": "CREATE UNIQUE INDEX audit_log_pkey ON public.audit_log USING btree (id)"
+  },
+  {
+    "indexname": "idx_audit_entity",
+    "indexdef": "CREATE INDEX idx_audit_entity ON public.audit_log USING btree (entity, entity_id)"
+  },
+  {
+    "indexname": "idx_audit_created",
+    "indexdef": "CREATE INDEX idx_audit_created ON public.audit_log USING btree (created_at)"
+  }
+]
+TABLE candidates
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "full_name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "email",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "phone",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "current_designation",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "current_company",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "total_experience_years",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 4,
+    "numeric_scale": 1,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "relevant_experience_years",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 4,
+    "numeric_scale": 1,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "primary_skills",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "jsonb"
+  },
+  {
+    "column_name": "secondary_skills",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "jsonb"
+  },
+  {
+    "column_name": "resume_link",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "location_current",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "location_preferred",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "jsonb"
+  },
+  {
+    "column_name": "open_to_relocate",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "notice_period_text",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 100,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "notice_period_days",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "employment_type",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "current_ctc_lpa",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "expected_ctc_lpa",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "availability_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "date"
+  },
+  {
+    "column_name": "source",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 100,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "registered_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "candidates_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS []
+UQS []
+IDX [
+  {
+    "indexname": "candidates_pkey",
+    "indexdef": "CREATE UNIQUE INDEX candidates_pkey ON public.candidates USING btree (id)"
+  },
+  {
+    "indexname": "idx_candidates_status",
+    "indexdef": "CREATE INDEX idx_candidates_status ON public.candidates USING btree (status)"
+  },
+  {
+    "indexname": "idx_candidates_skills",
+    "indexdef": "CREATE INDEX idx_candidates_skills ON public.candidates USING gin (primary_skills)"
+  },
+  {
+    "indexname": "idx_candidates_email",
+    "indexdef": "CREATE INDEX idx_candidates_email ON public.candidates USING btree (email)"
+  },
+  {
+    "indexname": "idx_candidates_name",
+    "indexdef": "CREATE INDEX idx_candidates_name ON public.candidates USING btree (full_name)"
+  }
+]
+TABLE discovered_keywords
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "type",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "raw_value",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "normalized",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "occurrences",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "1",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "first_seen_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "last_seen_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "reviewed_by",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "discovered_keywords_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS []
+UQS []
+IDX [
+  {
+    "indexname": "discovered_keywords_pkey",
+    "indexdef": "CREATE UNIQUE INDEX discovered_keywords_pkey ON public.discovered_keywords USING btree (id)"
+  },
+  {
+    "indexname": "idx_keywords_status",
+    "indexdef": "CREATE INDEX idx_keywords_status ON public.discovered_keywords USING btree (status)"
+  },
+  {
+    "indexname": "idx_keywords_type",
+    "indexdef": "CREATE INDEX idx_keywords_type ON public.discovered_keywords USING btree (type)"
+  }
+]
+TABLE employment_histories
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "passport_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "company_name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "designation",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "employment_type",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "start_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "date"
+  },
+  {
+    "column_name": "end_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "date"
+  },
+  {
+    "column_name": "official_email",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "is_current",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "bool"
+  },
+  {
+    "column_name": "verification_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "verified_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "employment_histories_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS [
+  {
+    "conname": "employment_histories_passport_id_fkey",
+    "def": "FOREIGN KEY (passport_id) REFERENCES passports(id) ON DELETE CASCADE"
+  }
+]
+UQS []
+IDX [
+  {
+    "indexname": "employment_histories_pkey",
+    "indexdef": "CREATE UNIQUE INDEX employment_histories_pkey ON public.employment_histories USING btree (id)"
+  },
+  {
+    "indexname": "idx_employment_passport",
+    "indexdef": "CREATE INDEX idx_employment_passport ON public.employment_histories USING btree (passport_id)"
+  }
+]
+TABLE passports
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "candidate_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "trust_score",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "completion_percent",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "full_name",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "email",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "phone",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "current_role",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "total_experience",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "skills",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "location",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "notice_period",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 100,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "linkedin_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "resume_link",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "consent_given",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "bool"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "passports_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS [
+  {
+    "conname": "passports_candidate_id_fkey",
+    "def": "FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE"
+  }
+]
+UQS [
+  {
+    "conname": "passports_candidate_id_key",
+    "def": "UNIQUE (candidate_id)"
+  }
+]
+IDX [
+  {
+    "indexname": "passports_pkey",
+    "indexdef": "CREATE UNIQUE INDEX passports_pkey ON public.passports USING btree (id)"
+  },
+  {
+    "indexname": "passports_candidate_id_key",
+    "indexdef": "CREATE UNIQUE INDEX passports_candidate_id_key ON public.passports USING btree (candidate_id)"
+  },
+  {
+    "indexname": "idx_passports_candidate",
+    "indexdef": "CREATE INDEX idx_passports_candidate ON public.passports USING btree (candidate_id)"
+  }
+]
+TABLE pipeline_entries
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "job_code",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "candidate_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "candidate_name",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "client_name",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "submitted_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "current_stage",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l1_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "l1_result",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l1_interviewer",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l2_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "l2_result",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l2_interviewer",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l3_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "l3_result",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "l3_interviewer",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "test_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "test_score",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "offer_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "ctc_offered_lpa",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "joining_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "date"
+  },
+  {
+    "column_name": "dropout_reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "assigned_recruiter",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "client_spoc_feedback",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "internal_notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "pipeline_entries_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS [
+  {
+    "conname": "pipeline_entries_candidate_id_fkey",
+    "def": "FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE"
+  },
+  {
+    "conname": "pipeline_entries_job_code_fkey",
+    "def": "FOREIGN KEY (job_code) REFERENCES requirements(job_code) ON DELETE CASCADE"
+  }
+]
+UQS [
+  {
+    "conname": "pipeline_entries_job_code_candidate_id_key",
+    "def": "UNIQUE (job_code, candidate_id)"
+  }
+]
+IDX [
+  {
+    "indexname": "pipeline_entries_pkey",
+    "indexdef": "CREATE UNIQUE INDEX pipeline_entries_pkey ON public.pipeline_entries USING btree (id)"
+  },
+  {
+    "indexname": "pipeline_entries_job_code_candidate_id_key",
+    "indexdef": "CREATE UNIQUE INDEX pipeline_entries_job_code_candidate_id_key ON public.pipeline_entries USING btree (job_code, candidate_id)"
+  },
+  {
+    "indexname": "idx_pipeline_stage",
+    "indexdef": "CREATE INDEX idx_pipeline_stage ON public.pipeline_entries USING btree (current_stage)"
+  },
+  {
+    "indexname": "idx_pipeline_job",
+    "indexdef": "CREATE INDEX idx_pipeline_job ON public.pipeline_entries USING btree (job_code)"
+  },
+  {
+    "indexname": "idx_pipeline_candidate",
+    "indexdef": "CREATE INDEX idx_pipeline_candidate ON public.pipeline_entries USING btree (candidate_id)"
+  }
+]
+TABLE requirements
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "job_code",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "client_name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "designation",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "department",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "job_description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "text"
+  },
+  {
+    "column_name": "required_skills",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "jsonb"
+  },
+  {
+    "column_name": "good_to_have_skills",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "jsonb"
+  },
+  {
+    "column_name": "min_experience",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "max_experience",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "location",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "employment_type",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "budget_min_lpa",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "budget_max_lpa",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "udt_name": "numeric"
+  },
+  {
+    "column_name": "notice_period_max_days",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "30",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "vacancies",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "1",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "priority",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 10,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "filled_count",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "udt_name": "int4"
+  },
+  {
+    "column_name": "account_manager",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "client_spoc",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "raised_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "activated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "closed_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "requirements_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS []
+UQS [
+  {
+    "conname": "requirements_job_code_key",
+    "def": "UNIQUE (job_code)"
+  }
+]
+IDX [
+  {
+    "indexname": "requirements_pkey",
+    "indexdef": "CREATE UNIQUE INDEX requirements_pkey ON public.requirements USING btree (id)"
+  },
+  {
+    "indexname": "requirements_job_code_key",
+    "indexdef": "CREATE UNIQUE INDEX requirements_job_code_key ON public.requirements USING btree (job_code)"
+  },
+  {
+    "indexname": "idx_requirements_status",
+    "indexdef": "CREATE INDEX idx_requirements_status ON public.requirements USING btree (status)"
+  },
+  {
+    "indexname": "idx_requirements_client",
+    "indexdef": "CREATE INDEX idx_requirements_client ON public.requirements USING btree (client_name)"
+  },
+  {
+    "indexname": "idx_requirements_skills",
+    "indexdef": "CREATE INDEX idx_requirements_skills ON public.requirements USING gin (required_skills)"
+  },
+  {
+    "indexname": "idx_requirements_code",
+    "indexdef": "CREATE INDEX idx_requirements_code ON public.requirements USING btree (job_code)"
+  }
+]
+TABLE users
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "email",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "password_hash",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "role",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "client_name",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "users_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS []
+UQS [
+  {
+    "conname": "users_email_key",
+    "def": "UNIQUE (email)"
+  }
+]
+IDX [
+  {
+    "indexname": "users_pkey",
+    "indexdef": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)"
+  },
+  {
+    "indexname": "users_email_key",
+    "indexdef": "CREATE UNIQUE INDEX users_email_key ON public.users USING btree (email)"
+  },
+  {
+    "indexname": "idx_users_email",
+    "indexdef": "CREATE INDEX idx_users_email ON public.users USING btree (email)"
+  },
+  {
+    "indexname": "idx_users_role",
+    "indexdef": "CREATE INDEX idx_users_role ON public.users USING btree (role)"
+  }
+]
+TABLE verification_requests
+COLUMNS [
+  {
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "employment_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "candidate_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "uuid"
+  },
+  {
+    "column_name": "employer_email",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "token",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "sent_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "expires_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "decision",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 10,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "verified_by",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "varchar"
+  },
+  {
+    "column_name": "verified_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  },
+  {
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "udt_name": "timestamptz"
+  }
+]
+PKS [
+  {
+    "conname": "verification_requests_pkey",
+    "def": "PRIMARY KEY (id)"
+  }
+]
+FKS [
+  {
+    "conname": "verification_requests_employment_id_fkey",
+    "def": "FOREIGN KEY (employment_id) REFERENCES employment_histories(id) ON DELETE CASCADE"
+  }
+]
+UQS [
+  {
+    "conname": "verification_requests_token_key",
+    "def": "UNIQUE (token)"
+  }
+]
+IDX [
+  {
+    "indexname": "verification_requests_pkey",
+    "indexdef": "CREATE UNIQUE INDEX verification_requests_pkey ON public.verification_requests USING btree (id)"
+  },
+  {
+    "indexname": "verification_requests_token_key",
+    "indexdef": "CREATE UNIQUE INDEX verification_requests_token_key ON public.verification_requests USING btree (token)"
+  },
+  {
+    "indexname": "idx_verification_token",
+    "indexdef": "CREATE INDEX idx_verification_token ON public.verification_requests USING btree (token)"
+  },
+  {
+    "indexname": "idx_verification_status",
+    "indexdef": "CREATE INDEX idx_verification_status ON public.verification_requests USING btree (status)"
+  }
+]
