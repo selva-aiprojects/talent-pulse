@@ -6,8 +6,7 @@ export const metadata: Metadata = {
   description: 'Enterprise AI Recruitment Hub',
   icons: [
     { rel: 'icon', url: '/favicon.ico' },
-    { rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' },
-    { rel: 'apple-touch-icon', url: '/icon' },
+    { rel: 'apple-touch-icon', url: '/favicon.ico' },
   ],
 }
 
