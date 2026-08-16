@@ -88,8 +88,8 @@ export default function LoginPage() {
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             padding: '4px 12px', borderRadius: '999px',
-            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)',
-            fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.8)',
+            background: 'rgba(14,165,233,0.15)', border: '1px solid rgba(14,165,233,0.3)',
+            fontSize: '11px', fontWeight: 700, color: '#0F172A',
           }}>
             <Sparkles size={11} style={{ color: '#06B6D4' }} />
             AI Recruitment Engine v2.0
