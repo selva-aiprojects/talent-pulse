@@ -99,6 +99,16 @@ export default function LoginPage() {
         {/* hero copy */}
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '460px' }}>
           <div style={{
+            width:'48px', height:'48px', borderRadius:'14px',
+            background:'linear-gradient(135deg, #38BDF8, #0EA5E9)',
+            display:'flex', alignItems:'center', justifyContent:'center',
+            boxShadow:'0 8px 24px rgba(56,192,247,0.4)',
+            marginBottom:'24px',
+          }}>
+            <img src="/TalentPulse-logo.png" alt="TalentPulse Logo" style={{ height:'28px', width:'auto', objectFit:'contain' }} />
+          </div>
+
+          <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
             padding: '5px 14px', borderRadius: '999px',
             background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.3)',
