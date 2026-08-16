@@ -114,12 +114,12 @@ export default function RegisterPage() {
         <div style={{ position:'relative', zIndex:1, maxWidth:'380px' }}>
           <div style={{
             width:'48px', height:'48px', borderRadius:'14px',
-            background:'linear-gradient(135deg, #38BDF8, #0EA5E9)',
+            background:'linear-gradient(135deg, #FF5A36, #E04825)',
             display:'flex', alignItems:'center', justifyContent:'center',
-            boxShadow:'0 8px 24px rgba(56,192,247,0.4)',
+            boxShadow:'0 8px 24px rgba(255,90,54,0.4)',
             marginBottom:'24px',
           }}>
-            <img src="/TalentPulse-logo.png" alt="TalentPulse Logo" style={{ height:'28px', width:'auto', objectFit:'contain' }} />
+            <Sparkles size={22} style={{ color:'#fff' }} />
           </div>
 
           <h1 style={{
