@@ -98,12 +98,15 @@ export default function RegisterPage() {
 
         {/* top nav */}
         <div style={{ position:'relative', zIndex:1, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <Link href="/login" style={{ display:'inline-flex', alignItems:'center', gap:'6px', fontSize:'12px', fontWeight:700, color:'#94A3B8', transition:'color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.color='#fff'}
-            onMouseLeave={e => e.currentTarget.style.color='#94A3B8'}
-          >
-            <ArrowLeft size={14} /> Back to Sign In
-          </Link>
+          <div style={{ display:'flex', alignItems:'center', gap:'16px' }}>
+            <img src="/TalentPulse-logo.png" alt="TalentPulse Logo" style={{ height:'40px', width:'auto', objectFit:'contain' }} />
+            <Link href="/login" style={{ display:'inline-flex', alignItems:'center', gap:'6px', fontSize:'12px', fontWeight:700, color:'#94A3B8', transition:'color 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.color='#fff'}
+              onMouseLeave={e => e.currentTarget.style.color='#94A3B8'}
+            >
+              <ArrowLeft size={14} /> Back to Sign In
+            </Link>
+          </div>
           <span style={{ fontSize:'11px', fontWeight:800, color:'#FF7A5C', textTransform:'uppercase', letterSpacing:'0.1em' }}>Candidate Profile</span>
         </div>
 
@@ -111,12 +114,12 @@ export default function RegisterPage() {
         <div style={{ position:'relative', zIndex:1, maxWidth:'380px' }}>
           <div style={{
             width:'48px', height:'48px', borderRadius:'14px',
-            background:'linear-gradient(135deg, #FF5A36, #E04825)',
+            background:'linear-gradient(135deg, #38BDF8, #0EA5E9)',
             display:'flex', alignItems:'center', justifyContent:'center',
-            boxShadow:'0 8px 24px rgba(255,90,54,0.4)',
+            boxShadow:'0 8px 24px rgba(56,192,247,0.4)',
             marginBottom:'24px',
           }}>
-            <Sparkles size={22} style={{ color:'#fff' }} />
+            <img src="/TalentPulse-logo.png" alt="TalentPulse Logo" style={{ height:'28px', width:'auto', objectFit:'contain' }} />
           </div>
 
           <h1 style={{
