@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: 'TalentPulse — Recruitment Intelligence Platform',
   description: 'Enterprise AI Recruitment Hub',
   icons: [
+    { rel: 'icon', url: '/favicon.ico' },
     { rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' },
-    { rel: 'icon', url: '/icon', type: 'image/png' },
     { rel: 'apple-touch-icon', url: '/icon' },
   ],
 }
