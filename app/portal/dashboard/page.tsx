@@ -274,8 +274,9 @@ export default function CandidatePortal() {
           <Card
             title="Cryptographic Candidate Passport"
             subtitle="Maintain your verified profile details for AI semantic matching"
-            className="p-8 bg-white"
+            className="p-8 bg-slate-50"
           >
+            <img src="/TalentPulse-logo.png" alt="TalentPulse Logo" className="h-8 w-auto object-contain mb-4" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
               <Input
                 label="Full Legal Name"
